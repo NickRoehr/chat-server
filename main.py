@@ -3,8 +3,8 @@ import threading
 from user_data import add_user, authenticate_user
 
 # Server Informationen
-SERVER_HOST = '0.0.0.0'  # Setze die lokale IP für Tests
-SERVER_PORT = 54321
+SERVER_HOST = '127.0.0.1'  # Setze die lokale IP für Tests
+SERVER_PORT = 12345        # Port festlegen
 
 # Erstelle einen Server-Socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -42,12 +42,12 @@ def handle_client(client_socket, client_address):
             message = client_socket.recv(1024).decode().strip()
 
             if message.startswith("register"):
-                _, username, password = message.split()
+                _, username, password = message.split() # _, weil das wort register nicht mehr gebraucht wird
                 response = add_user(username, password)
                 client_socket.send(response.encode())
 
             elif message.startswith("login"):
-                _, username, password = message.split()
+                _, username, password = message.split() # _, weil das wort login nicht mehr gebraucht wird
                 if authenticate_user(username, password):
                     sessions[client_socket] = username  # Benutzer-Session speichern
                     client_socket.send(f"Willkommen {username}!\n".encode())

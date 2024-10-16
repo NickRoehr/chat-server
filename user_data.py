@@ -20,14 +20,11 @@ session = Session()
 
 def add_user(username,password):
     new_user = User(name=username,password=password)
-    try:
-        session.add(new_user)
-        session.commit()
-        return "Benutzer erfolgreich erstellt."
     
-    except :
-        session.rollback()
-        return "Benutzer existiert bereits."
+    session.add(new_user)
+    session.commit()
+    return "Benutzer erfolgreich erstellt."
+    
     
 def authenticate_user(username, password):
     

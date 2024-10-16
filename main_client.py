@@ -1,9 +1,10 @@
 import socket
 import threading
+from chat_data import add_message
 
 # Server-Details
-SERVER_HOST = '0.0.0.0'  # Stelle sicher, dass dies die IP des Servers ist
-SERVER_PORT = 54321
+SERVER_HOST = '127.0.0.1'  # Stelle sicher, dass dies die IP des Servers ist
+SERVER_PORT = 12345
 
 # Erstelle einen Client-Socket
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,6 +35,7 @@ def send_messages():
             client_socket.close()
             break
         client_socket.send(message.encode())
+        add_message(message)
 
 # Starte zwei Threads: einen zum Empfangen und einen zum Senden von Nachrichten
 receive_thread = threading.Thread(target=receive_messages)
