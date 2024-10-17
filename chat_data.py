@@ -10,7 +10,7 @@ Base = declarative_base()
 class Chat(Base):
     __tablename__='chat'
     id = Column(Integer,primary_key=True)
-    message = Column(String,unique=True,nullable=False)
+    message = Column(String,nullable=False)
     timestemp = Column(String,nullable=False)
     
 Base.metadata.create_all(engine)
